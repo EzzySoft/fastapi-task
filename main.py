@@ -1,9 +1,13 @@
+import os
+
 from fastapi import FastAPI
 import clickhouse_connect
 
 app = FastAPI()
+password = os.environ.get("PASSWORD", "GQ25VTN~6lBLI")
+
 client = clickhouse_connect.get_client(host='w55etl9fz2.europe-west4.gcp.clickhouse.cloud',
-                                       port=8443, username='default', password='8Yog_XHSILPWo')
+                                       port=8443, username='default', password=password)
 
 with open("query.sql", "r", encoding="UTF8") as file:
     query_request = file.read()
